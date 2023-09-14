@@ -8,8 +8,8 @@ const GENDERS = [
 
 export const createGenders = async () => {
     for (const gender of GENDERS) {
-        await Gender.create({
-            name: gender
+        await Gender.findOrCreate({
+            where: { name: gender }
         });
     }
 }

@@ -1,8 +1,11 @@
 import { sequelize } from "../database/config.js";
+import { Answer } from "./Answer.js";
 import { DataTypes } from "sequelize";
 import { Gender } from "./Gender.js";
 import { Location } from "./Location.js";
 import { StudyLevel } from "./StudyLevel.js";
+import { Question } from "./Question.js";
+import { Option } from "./Options.js";
 
 export const User = sequelize.define('User', {
     age: {
@@ -12,11 +15,17 @@ export const User = sequelize.define('User', {
     },
 });
 
-User.hasOne(Gender);
-Gender.hasMany(User);
+User.belongsTo(Gender, { foreignKey: 'genderId' });
+Gender.hasMany(User, { foreignKey: 'genderId' });
 
-User.hasOne(Location);
-Location.hasMany(User);
+User.belongsTo(Location, { foreignKey: 'locationId' });
+Location.hasMany(User, { foreignKey: 'locationId' }),
 
-User.hasOne(StudyLevel);
-StudyLevel.hasMany(User);
+User.belongsTo(StudyLevel, { foreignKey: 'studyLevelId' });
+StudyLevel.hasMany(User, { foreignKey: 'studyLevelId'});
+
+Answer.belongsTo(User, { foreignKey: 'userId' });
+User.hasMany(Answer, { foreignKey: 'userId' });
+
+Question.hasMany(Option, { foreignKey: 'questionId' });
+Option.belongsTo(Question, { foreignKey: 'questionId' });

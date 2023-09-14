@@ -32,8 +32,8 @@ const DEFAULT_LOCATIONS = [
 
 export const createLocations = async () => {
     for (const location of DEFAULT_LOCATIONS) {
-        await Location.create({
-            name: location
+        await Location.findOrCreate({
+            where: { name: location }
         });
     }
 }

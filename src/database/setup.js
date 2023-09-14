@@ -8,10 +8,13 @@ export async function setupDatabase() {
         .then(() => console.log("Conexión exitosa a la base de datos"))
         .catch(console.error);
 
-    await sequelize.sync({
-        force: !envConfig.IS_PROD
-    });
-
-    // Crear registros por defecto
-    await seedDatabase(); 
+    try {
+        await sequelize.sync({
+            force: !envConfig.IS_PROD
+        });
+        // Crear registros por defecto
+        await seedDatabase(); 
+    } catch(err) {
+        console.log('No se pudo sincronizar correctamente la base de datos: ', err.message);
+    }
 }

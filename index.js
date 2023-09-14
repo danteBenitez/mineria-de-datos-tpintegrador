@@ -2,7 +2,6 @@ import express from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
-import './src/models/User.js'
 import { envConfig } from './src/config/env.js';
 
 import { setupDatabase } from './src/database/setup.js';

@@ -14,12 +14,8 @@ import {
   deleteUserSchema,
 } from "../schema/user.schema.js";
 import { validate } from "../middleware/validate.js";
-import validateJWT from "../middleware/validate-jwt.js";
-import { isAdmin } from "../middleware/isAdmin.js";
-const router = Router();
 
-const adminRoute = [validateJWT, isAdmin];
-const userRoute = [validateJWT];
+const router = Router();
 
 router.get("/", adminRoute, getAllUsers);
 router.get('/info', userRoute, getUserInfoByToken);

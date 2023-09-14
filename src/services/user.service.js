@@ -70,7 +70,9 @@ export class UserService {
    *
    * @param {{
    *   age: number,
-   *   genderId
+   *   genderId: number,
+   *   locationId: number,
+   *   
    * }} userData - Los datos del usuario a crear
    * @returns {Promise<UserType | null>} El usuario creado o null
    * si hubo conflicts
