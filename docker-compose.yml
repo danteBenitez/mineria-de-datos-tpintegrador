@@ -1,0 +1,18 @@
+services:
+  web:
+    build: .
+    restart: always 
+    depends_on:
+      - mysql
+    container_name: authapi
+    environment:
+      - DB_HOST=mysql
+    ports:
+      - "8080:8080"
+  mysql:
+    image: "mysql:8.1.0"
+    container_name: authdb
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_DATABASE: auth_users
+      MYSQL_TCP_PORT: 3306
