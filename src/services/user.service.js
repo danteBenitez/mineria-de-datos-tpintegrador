@@ -1,6 +1,6 @@
-import { comparePassword, hashPassword } from "../utils/hash.js";
 import { Op } from "sequelize";
 import { User } from "../models/User.js";
+import { comparePassword, hashPassword } from "../utils/hash.js";
 
 
 /**
@@ -77,20 +77,12 @@ export class UserService {
    * @returns {Promise<UserType | null>} El usuario creado o null
    * si hubo conflicts
    */
-  async create({ email, username, password, role }) {
-    const exists = await this.exists({ email, username });
-
-    if (exists) {
-      return null;
-    }
-
-    const hashedPassword = await hashPassword(password);
-    console.log("Creating user with hashedPassword: ", hashedPassword);
+  async create({ age, genderId, locationId, studyLevelId }) {
     const created = await this.userModel.create({
-      username,
-      email,
-      password: hashedPassword,
-      role
+      age,
+      genderId,
+      locationId,
+      studyLevelId
     });
 
     return created;

@@ -6,6 +6,7 @@ import { Location } from "./Location.js";
 import { StudyLevel } from "./StudyLevel.js";
 import { Question } from "./Question.js";
 import { Option } from "./Options.js";
+import { Survey } from "./Survey.js";
 
 export const User = sequelize.define('User', {
     age: {
@@ -24,8 +25,11 @@ Location.hasMany(User, { foreignKey: 'locationId' }),
 User.belongsTo(StudyLevel, { foreignKey: 'studyLevelId' });
 StudyLevel.hasMany(User, { foreignKey: 'studyLevelId'});
 
-Answer.belongsTo(User, { foreignKey: 'userId' });
-User.hasMany(Answer, { foreignKey: 'userId' });
+Answer.belongsTo(Survey, { foreignKey: 'surveyId' });
+Survey.hasMany(Answer, { foreignKey: 'surveyId' });
 
 Question.hasMany(Option, { foreignKey: 'questionId' });
 Option.belongsTo(Question, { foreignKey: 'questionId' });
+
+User.hasOne(Survey, { foreignKey: 'userId' });
+Survey.belongsTo(User, { foreignKey: 'userId' });

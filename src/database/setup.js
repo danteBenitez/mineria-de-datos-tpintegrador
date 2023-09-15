@@ -1,7 +1,9 @@
 import { envConfig } from "../config/env.js";
 import { sequelize } from "./config.js";
+import { surveyService } from "../services/survey.service.js";
 import '../models/User.js';
 import seedDatabase from "./seeds/seed-db.js";
+import { userService } from "../services/user.service.js";
 
 export async function setupDatabase() {
     await sequelize.authenticate()
@@ -14,6 +16,17 @@ export async function setupDatabase() {
         });
         // Crear registros por defecto
         await seedDatabase(); 
+        userService.create({
+            age: 19,
+            genderId: 2,
+            locationId: 23,
+            studyLevelId: 3
+        })
+        surveyService.create(1, {
+            1: 1,
+            2: 2,
+            3: 5
+        })
     } catch(err) {
         console.log('No se pudo sincronizar correctamente la base de datos: ', err.message);
     }
