@@ -9,11 +9,6 @@ export async function registerUser(req, res) {
   try {
     const created = await userService.create(req.body);
 
-    if (!created) {
-      return res.status(400).json({
-        message: 'Nombre de usuario o contraseña no disponibles'
-      });
-    }
     const token = await createToken(created.id.toString());
 
     res.status(201).json({

@@ -11,6 +11,9 @@ export const Location = sequelize.define('Location', {
 
 // Método utilitario para recuperar todas las
 // ID de opciones disponibles
-Location.availableLocations = () => {
-    return Location.findAll();
+Location.availableLocations = async () => {
+    const locations = await Location.findAll({
+        attributes: ['id']
+    });
+    return locations.map(l => l.id);
 }

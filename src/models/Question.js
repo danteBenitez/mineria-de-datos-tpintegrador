@@ -8,3 +8,11 @@ export const Question = sequelize.define('Question', {
     }
 })
 
+// Método utilitario para recuperar todas las
+// ID de opciones disponibles
+Question.availableQuestions = async () => {
+    const questionsId = await Question.findAll({
+        attributes: ['id']
+    });
+    return questionsId.map(l => l.id);
+}

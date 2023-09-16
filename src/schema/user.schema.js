@@ -23,6 +23,7 @@ const commonSchemaOptions = {
       .toInt()
       .custom(async (value) => {
         const available = await Gender.availableGenders();
+        console.log(available);
         if (!available.includes(value)) {
           throw new Error("id de género inválida");
         }

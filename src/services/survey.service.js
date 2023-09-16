@@ -68,60 +68,6 @@ export class SurveyService {
     return survey;
   }
 
-  /**
-   * Acutaliza el usuario especificado
-   * con los atributos especificados.
-   * Toma en cuenta conflictos y encripta la
-   * contraseña de actualizarse
-   *
-   * @param {number} surveyId
-   * @param {{
-   *   email: string,
-   *   surveyname: string,
-   *   password: string,
-   *   role: string
-   * }} surveyData - Los datos del usuario a crear
-   * @returns {Promise<SurveyType | null>} El usuario actualizado
-   * o un error representando qué salió mal
-   */
-  async update(surveyId, { password, ...rest }) {
-    const existingSurvey = await this.findById(surveyId);
-
-    if (!existingSurvey) {
-      return null;
-    }
-
-    const hashedPassword = await hashPassword(password);
-    await existingSurvey.update({ ...rest, password: hashedPassword });
-
-    return existingSurvey;
-  }
-
-
-  /**
-   * Autentica un usuario con su surveyname
-   * y contraseña
-   * 
-   * @param {{
-   *   surveyname: string,
-   *   password: string,
-   * }} surveyData
-   * @returns {Promise<SurveyType | null>} El usuario registrado
-   * o null si hubo un error
-   */
-  async login({ surveyname, password }) {
-    const found = await this.surveyModel.findOne({
-        where: {
-            surveyname,
-        }
-    });
-
-    if (!found || !(await comparePassword(password, found.password))) {
-        return null;
-    }
-
-    return found;
-  }
 }
 
 export const surveyService = new SurveyService(Survey);

@@ -5,6 +5,8 @@ export async function createUser(req, res) {
     try {
         const created = await userService.create(req.body);
 
+
+
         res.status(201).json({
             message: 'Usuario creado exitosamente',
             user: created

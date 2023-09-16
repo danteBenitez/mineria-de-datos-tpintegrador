@@ -11,6 +11,9 @@ export const StudyLevel = sequelize.define('StudyLevel', {
 
 // Método utilitario para recuperar todas las
 // ID de opciones disponibles
-StudyLevel.availableLevels = () => {
-    return StudyLevel.findAll();
+StudyLevel.availableLevels = async () => {
+    const levels = await StudyLevel.findAll({
+        attributes: ['id']
+    });
+    return levels.map(l => l.id);
 }

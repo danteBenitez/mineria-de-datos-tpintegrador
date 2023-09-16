@@ -11,6 +11,9 @@ export const Gender = sequelize.define('Gender', {
 
 // Método utilitario para recuperar todas las
 // ID de géneros disponibles
-Gender.availableGenders = () => {
-    return Gender.findAll();
+Gender.availableGenders = async () => {
+    const genders = await Gender.findAll({
+        attributes: ['id']
+    });
+    return genders.map(g => g.id);
 }
