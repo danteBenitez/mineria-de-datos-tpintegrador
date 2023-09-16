@@ -9,3 +9,8 @@ export const Gender = sequelize.define('Gender', {
     }
 })
 
+// Método utilitario para recuperar todas las
+// ID de géneros disponibles
+Gender.availableGenders = () => {
+    return Gender.findAll();
+}

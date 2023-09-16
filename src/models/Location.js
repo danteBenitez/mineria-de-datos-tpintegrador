@@ -8,3 +8,9 @@ export const Location = sequelize.define('Location', {
         comment: 'La localidad en la que vive el encuestado.'
     },
 })
+
+// Método utilitario para recuperar todas las
+// ID de opciones disponibles
+Location.availableLocations = () => {
+    return Location.findAll();
+}
