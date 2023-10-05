@@ -1,4 +1,4 @@
-import { surveyService } from "../services/survey.service";
+import { surveyService } from "../services/survey.service.js";
 
 export async function createSurvey(req, res) {
     const {

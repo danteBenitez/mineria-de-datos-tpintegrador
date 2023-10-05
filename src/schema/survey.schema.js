@@ -1,7 +1,7 @@
 import { body } from "express-validator";
-import { Question } from "../models/Question";
-import { createUserSchema } from "./user.schema";
-import { Option } from "../models/Options";
+import { Question } from "../models/Question.js";
+import { createUserSchema } from "./user.schema.js";
+import { Option } from "../models/Options.js";
 
 const commonSchemaOptions = [
   body("answers")

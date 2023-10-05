@@ -7,7 +7,7 @@ const QUESTIONS = [
   "Al realizar un reclamo o una consulta al soporte al cliente:",
   "Considera que la experiencia al usar el reloj en general es",
   "¿Cuáles errores encontró al utilizar el reloj?",
-  "¿Con qué frecuencia encuentra los servicios que requieren de conexión de red (p. ej. correo electrónico o SMS) no están disponibles, aún cuando hay conexión adecuada?",
+  "¿Con qué frecuencia encuentra que los servicios que requieren de conexión de red (p. ej. correo electrónico o SMS) no están disponibles, aún cuando hay conexión adecuada?",
   "¿Cuál es la probabilidad de que vuelva a comprar un producto similar a este?"
 ];
 
