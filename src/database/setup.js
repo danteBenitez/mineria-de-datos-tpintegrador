@@ -16,13 +16,13 @@ export async function setupDatabase() {
         });
         // Crear registros por defecto
         await seedDatabase(); 
-        userService.create({
+        const user = await userService.create({
             age: 19,
             genderId: 2,
             locationId: 23,
             studyLevelId: 3
         })
-        surveyService.create(1, {
+        surveyService.create(user, {
             1: 1,
             2: 2,
             3: 5

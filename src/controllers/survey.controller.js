@@ -1,13 +1,13 @@
 import { surveyService } from "../services/survey.service";
 
 export async function createSurvey(req, res) {
-    const { id: userId } = req.user;
     const {
+        user,
         answers
     } = req.body;
 
     try {
-        const newSurvey = await surveyService.create(userId, answers);
+        const newSurvey = await surveyService.create(user, answers);
 
         if (!newSurvey) {
             return res.status(400).json({
@@ -18,7 +18,7 @@ export async function createSurvey(req, res) {
         res.status(201).json({
             message: 'Encuesta creada correctamente',
             survey: newSurvey
-        })
+        });
 
     } catch(err) {
         console.error('Error al recibir respuestas: ', err);
