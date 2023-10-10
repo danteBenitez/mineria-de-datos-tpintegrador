@@ -65,19 +65,20 @@ export class SurveyService {
       return null;
     }
 
-    const { id: userId } = user;
+    const { id: userId } = foundUser;
 
     if (!userId) throw new Error(`ID de usuario inválida: ${userId}`);
 
     const survey = await Survey.create({
-        userId
+      userId
     });
 
-    for (const optionId of Object.entries(surveyData)) {
+    for (const [_, optionId] of Object.entries(surveyData)) {
         await survey.createAnswer({
             optionId
         });
     }
+    console.log(survey);
     return survey;
   }
 

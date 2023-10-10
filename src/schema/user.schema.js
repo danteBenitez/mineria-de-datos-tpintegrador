@@ -5,16 +5,16 @@ import { StudyLevel } from "../models/StudyLevel.js";
 
 const commonSchemaOptions = {
   validateAge: [
-    body("age")
+    body("user.age")
       .exists()
       .withMessage("Debe proporcionar su edad")
-      .isNumeric()
+      .isNumeric().withMessage("La edad debe ser un entero")
       .isInt()
       .withMessage("Debe proporcionar una edad válida")
       .toInt(),
   ],
   validateGender: [
-    body("genderId")
+    body("user.genderId")
       .exists()
       .withMessage("Debe proporcionar una ID de género")
       .isNumeric()
@@ -31,7 +31,7 @@ const commonSchemaOptions = {
       }),
   ],
   validateLocation: [
-    body("locationId")
+    body("user.locationId")
       .exists()
       .withMessage("Debe proporcionar una ID de localidad")
       .isNumeric()
@@ -47,7 +47,7 @@ const commonSchemaOptions = {
       }),
   ],
   validateStudyLevelId: [
-    body("studyLevelId")
+    body("user.studyLevelId")
       .exists()
       .withMessage("Debe proporcionar una ID de tipo de nivel de estudio")
       .isNumeric()

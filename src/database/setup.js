@@ -12,21 +12,10 @@ export async function setupDatabase() {
 
     try {
         await sequelize.sync({
-            force: !envConfig.IS_PROD
-        });
+             force: false // !envConfig.IS_PROD
+         });
         // Crear registros por defecto
-        await seedDatabase(); 
-        const user = await userService.create({
-            age: 19,
-            genderId: 2,
-            locationId: 23,
-            studyLevelId: 3
-        })
-        surveyService.create(user, {
-            1: 1,
-            2: 2,
-            3: 5
-        })
+        // await seedDatabase(); 
     } catch(err) {
         console.log('No se pudo sincronizar correctamente la base de datos: ', err.message);
     }

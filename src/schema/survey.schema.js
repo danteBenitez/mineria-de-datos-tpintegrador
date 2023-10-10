@@ -11,31 +11,44 @@ const commonSchemaOptions = [
     .isObject()
     .withMessage("Las respuestas deben ser un objeto de pares ID_pregunta-ID_respuesta")
     .bail()
+    .customSanitizer(answers => {
+      const keys = Object.keys(answers);
+      const newAnswers = {};
+      for (const key of keys) {
+        newAnswers[parseInt(key)] = parseInt(answers[key]);
+      }
+      return newAnswers
+    })
     .custom(async (answers) => {
       const questionIds = Object.keys(answers);
       const optionIds = Object.values(answers);
       const availableQuestion = await Question.availableQuestions();
       const availableOption = await Option.availableOptions();
-      const answeredQuestionIds = [];
       for (const questionId of questionIds) {
         for (const optionId of optionIds) {
-          if (!availableQuestion.includes(questionId)) {
+          const questionNumber = parseInt(questionId);
+          const optionNumber = parseInt(optionId);
+          if (!availableQuestion.includes(questionNumber)) {
             throw new Error("ID de pregunta desconocida");
           }
-          if (!availableOption.includes(optionId)) {
+          if (!availableOption.includes(optionNumber)) {
             throw new Error("ID de opción desconocido");
           }
-          const { id } = Question.findOne({
-            where: { optionId },
-            attributes: ["id"]
-          });
-          if (!answeredQuestionIds.includes(id)) {
-            answeredQuestionIds.push(id);
-            continue;
-          }
-          throw new Error("No puede responder a una pregunta más de una vez") ;
         }
       }
+      const answeredQuestionsId = optionIds.map(async optionId => {
+        const { questionId: answeredId }= await Option.findOne({
+          where: { id: optionId },
+          attributes: ["questionId"]
+        });
+        return answeredId;
+      });
+      const repeated = new Set(answeredQuestionsId).size !== answeredQuestionsId.length;
+      if (repeated) {
+        console.log("Answered: ", answeredQuestionsId);
+        throw new Error("Sólo puedes responder una opción por cada pregunta.");
+      }
+      return true;
     }),
   ...createUserSchema
 ];

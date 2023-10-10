@@ -10,8 +10,8 @@ export const Option = sequelize.define('Option', {
 
 // Método utilitario para recuperar todas las
 // ID de opciones disponibles
-Option.availableOptions = () => {
-    const options = Option.findAll({
+Option.availableOptions = async () => {
+    const options = await Option.findAll({
         attributes: ['id']
     });
     return options.map(op => op.id);

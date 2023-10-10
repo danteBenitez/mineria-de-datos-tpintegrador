@@ -21,8 +21,73 @@
 
                 </p>
             </div>
+            <div class="container-question">
+                    <div class="input-group ">
+                        <label for="age">
+                            <span>
+                                Ingrese su edad
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-control" type="number" name="age" required>
+                    </div>
+            </div>
+            <div class="container-question">
+                    <div class="input-group ">
+                        <label for="studyLevelId">
+                            <span>
+                                Seleccione su nivel de estudio:
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <select class="form-select" type="number" name="studyLevelId" required>
+                            <% for (const studyLevel of studyLevels) { %>
+                                <option name="studyLevelId" value="<%= studyLevel.id %>">
+                                    <%= (studyLevel.description.slice(0, 1).toUpperCase() + studyLevel.description.slice(1).toLowerCase()).split('_').join(' ') %>
+                                </option>
+                            <% } %>
+                        </select>
+                    </div>
+            </div>
+            <div class="container-question">
+                    <div class="input-group ">
+                        <label for="locationId">
+                            <span>
+                                Seleccione su localidad:
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <select class="form-select" type="number" name="locationId" required>
+                            <% for (const location of locations) { %>
+                                <option name="locationId" value="<%= location.id %>">
+                                    <%= location.name.split(' ').map(s => s.toLowerCase()).map(s => s[0].toUpperCase() + s.slice(1)).join(' ') %>
+                                </option>
+                            <% } %>
+                        </select>
+                    </div>
+            </div>
+            <div class="container-question">
+                    <div class="input-group ">
+                        <label>
+                            <span>
+                                Seleccione su género: 
+                            </span>
+                        </label>
+                    </div>
+                    <% for (const gender of genders) { %>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="genderId" value="<%= gender.id %>" required>
+                            <label class="form-check-label">
+                                <%= gender.name.slice(0,1).toUpperCase() + gender.name.toLowerCase().slice(1) %>
+                            </label>
+                        </div>
+                    <% } %>
+            </div>
             <% for (const question of questions) { %>
-                <div class="container-question">
+                <div class="container-question survey-question">
                     <div class="input-group ">
                         <label><span>
                                 <%= question.text %>
@@ -30,7 +95,7 @@
                     </div>
                     <% for (const option of question.options) { %>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="<%= question.id %>">
+                            <input class="form-check-input" type="radio" name="<%= question.id %>" value="<%= option.id %>" required>
                             <label class="form-check-label">
                                 <%= option.description %>
                             </label>
@@ -38,7 +103,7 @@
                     <% } %>
                 </div>
             <% } %>
-            <button type="button" class="btn btn-primary">Enviar</button>
+            <button type="submit" class="btn btn-primary">Enviar</button>
             </div>
 
     </form>
@@ -49,6 +114,7 @@
             2023 Contact - Politicas de seguridad - Condiciones del servicio
         </div>
     </footer>
+    <script src="/js/submit.js"></script>
 </body>
 
 </html>
