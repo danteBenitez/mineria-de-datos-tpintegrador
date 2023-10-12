@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken';
 export default async function validateJWT(req, res, next) {
     const token = req.headers.authorization;
     if (!token) { 
-        console.log("Token not found");
         return res.sendStatus(403);
     }
 

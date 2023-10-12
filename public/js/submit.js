@@ -52,10 +52,6 @@ form.addEventListener('submit', async (e) => {
             text: errors[0].msg
         })
     }
-
-
-
 });
 
-console.log(surveyQuestions);
 

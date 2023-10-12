@@ -26,7 +26,7 @@ const OPTIONS = {
     "El reloj no enciende correctamente, se queda tildado al iniciar",
     "Las aplicaciones se abren y se cierran inmediatamente",
     "El reloj se ralentiza por momentos",
-    "Otro error desconocido. Mencione.",
+    "Otro error desconocido relacionado con el funcionamiento general del dispositivo.",
   ],
   7: ["Nunca", "Poco frecuente", "Frecuente", "Casi siempre"],
   8: ["No lo haría", "Poco probable", "Probable", "Muy probable"],

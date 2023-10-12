@@ -15,7 +15,7 @@ export async function setupDatabase() {
              force: false // !envConfig.IS_PROD
          });
         // Crear registros por defecto
-        // await seedDatabase(); 
+        await seedDatabase(); 
     } catch(err) {
         console.log('No se pudo sincronizar correctamente la base de datos: ', err.message);
     }
