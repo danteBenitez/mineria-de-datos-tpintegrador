@@ -16,6 +16,9 @@ export const User = sequelize.define('User', {
     },
 });
 
+Answer.belongsTo(Option, { foreignKey: 'optionId' });
+Option.hasMany(Answer, { foreignKey: 'optionId' });
+
 User.belongsTo(Gender, { foreignKey: 'genderId' });
 Gender.hasMany(User, { foreignKey: 'genderId' });
 

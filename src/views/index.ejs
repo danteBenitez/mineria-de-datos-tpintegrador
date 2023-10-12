@@ -16,36 +16,41 @@
             <div>
                 <h1 class="display-1 fs-1">Formulario sobre experiencia</h1>
             </div>
-            <div>
-                <p>
-
+            <div class="container-question">
+                <p class="py-2 px-1">
+                    La presente encuesta espera recopilar información sobre la experiencia de usuario y la calidad de un
+                    producto tecnológico.
+                    El producto presentado consiste en un reloj de muñeca inteligente paralelo al Apple Watch con
+                    variadas funcionalidades utilitarias (establecer recordatorios, GPS y brújula, mensajes y llamadas), y un enfoque en los datos biométricos del usuario. Por ejemplo, es capaz de medir la
+                    frecuencia cardíaca y las fases de sueño para el control del usuario.
                 </p>
             </div>
             <div class="container-question">
-                    <div class="input-group ">
-                        <label for="age">
-                            <span>
-                                Ingrese su edad
-                            </span>
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-control" type="number" name="age" required>
-                    </div>
+                <div class="input-group ">
+                    <label for="age">
+                        <span>
+                            Ingrese su edad
+                        </span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-control" type="number" name="age" required>
+                </div>
             </div>
             <div class="container-question">
-                    <div class="input-group ">
-                        <label for="studyLevelId">
-                            <span>
-                                Seleccione su nivel de estudio:
-                            </span>
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <select class="form-select" type="number" name="studyLevelId" required>
-                            <% for (const studyLevel of studyLevels) { %>
-                                <option name="studyLevelId" value="<%= studyLevel.id %>">
-                                    <%= (studyLevel.description.slice(0, 1).toUpperCase() + studyLevel.description.slice(1).toLowerCase()).split('_').join(' ') %>
+                <div class="input-group ">
+                    <label for="studyLevelId">
+                        <span>
+                            Seleccione su nivel de estudio:
+                        </span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <select class="form-select" type="number" name="studyLevelId" required>
+                        <% for (const studyLevel of studyLevels) { %>
+                            <option name="studyLevelId" value="<%= studyLevel.id %>">
+                                <%= (studyLevel.description.slice(0, 1).toUpperCase() +
+                                    studyLevel.description.slice(1).toLowerCase()).split('_').join(' ') %>
                                 </option>
                             <% } %>
                         </select>
@@ -89,9 +94,11 @@
             <% for (const question of questions) { %>
                 <div class="container-question survey-question">
                     <div class="input-group ">
-                        <label><span>
+                        <label>
+                            <span>
                                 <%= question.text %>
-                            </span></label>
+                            </span>
+                        </label>
                     </div>
                     <% for (const option of question.options) { %>
                         <div class="form-check">

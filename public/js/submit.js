@@ -35,6 +35,8 @@ form.addEventListener('submit', async (e) => {
         
         if (!response.ok) throw response;
 
+        window.location.assign('/thanks.html');
+
     } catch(res) {
         console.error(res);
         const { errors } = await res.json();

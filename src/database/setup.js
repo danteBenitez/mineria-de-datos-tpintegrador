@@ -12,7 +12,7 @@ export async function setupDatabase() {
 
     try {
         await sequelize.sync({
-             force: false // !envConfig.IS_PROD
+             alter: true // !envConfig.IS_PROD
          });
         // Crear registros por defecto
         await seedDatabase(); 
