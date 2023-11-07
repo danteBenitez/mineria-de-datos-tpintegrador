@@ -9,7 +9,10 @@ const commonSchemaOptions = {
       .exists()
       .withMessage("Debe proporcionar su edad")
       .isNumeric().withMessage("La edad debe ser un entero")
-      .isInt()
+      .isInt({
+        gt: 0,
+        lt: 100
+      })
       .withMessage("Debe proporcionar una edad válida")
       .toInt(),
   ],
